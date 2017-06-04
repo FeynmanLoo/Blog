@@ -83,7 +83,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
+        'NAME': 'mingor',
         'USER':'root',
         'PASSWORD':'password',
         'HOST':'www.51mingor.net',
