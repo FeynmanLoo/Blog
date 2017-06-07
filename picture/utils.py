@@ -1,22 +1,19 @@
 import os
 from uuid import uuid4
+from django.utils.deconstruct import deconstructible
+import time
 
-def path_and_rename(path):
-    '''
-    用uuid重命名文件名
-    :param path:
-    :return:
-    '''
+@deconstructible
+class PathAndRename(object):
 
-    def wrapper(instance, filename):
+    def __init__(self, sub_path):
+        self.path = sub_path
+
+    def __call__(self, instance, filename):
         ext = filename.split('.')[-1]
-        # get filename
-        if instance.pk:
-            filename = '{}.{}'.format(instance.pk, ext)
-        else:
-            # set filename as random string
-            filename = '{}.{}'.format(uuid4().hex, ext)
+        # set filename as random string
+        filename = '{}.{}'.format(uuid4().hex, ext)
         # return the whole path to the file
-        return os.path.join(path, filename)
+        return os.path.join(self.path, filename)
 
-    return wrapper
+path_and_rename = PathAndRename(time.strftime("images/%Y/%m/%d"))

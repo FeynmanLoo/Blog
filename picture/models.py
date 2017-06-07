@@ -10,7 +10,7 @@ class Image(models.Model):
     content_type = models.CharField(max_length=255, blank=True)
     host = models.CharField(max_length=255, blank=True)
     url = models.CharField(max_length=255, blank=True)
-    img = models.ImageField(upload_to=utils.path_and_rename(time.strftime("images/%Y/%m/%d")))
+    img = models.ImageField(upload_to=utils.path_and_rename)
 
     def __str__(self):
         return self.name
